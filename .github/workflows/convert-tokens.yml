@@ -1,0 +1,53 @@
+name: Convert JSON Tokens to CSS
+
+on:
+  push:
+    paths:
+      - 'tokens.json'
+    branches:
+      - main
+      - master
+      - 'copilot/**'
+  pull_request:
+    paths:
+      - 'tokens.json'
+  workflow_dispatch:
+
+jobs:
+  convert-tokens:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Convert JSON to CSS
+        run: node convert-tokens.js tokens.json tokens.css
+      
+      - name: Check if CSS file changed
+        id: check_changes
+        run: |
+          if git diff --quiet tokens.css; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add tokens.css
+          git commit -m "Auto-generate CSS from tokens.json"
+          git push
