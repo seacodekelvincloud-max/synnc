@@ -1,0 +1,36 @@
+name: JSON to CSS
+
+on:
+  push:
+    paths:
+      - 'tokens.json'
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Convert tokens.json to CSS custom properties
+        run: node scripts/json-to-css.js tokens.json styles/variables.css
+
+      - name: Commit generated CSS
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add styles/variables.css
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: regenerate CSS custom properties from tokens.json"
+            git push
+          fi
