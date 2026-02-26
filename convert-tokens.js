@@ -61,7 +61,7 @@ function formatCss(variables) {
   const groupKeys = Object.keys(grouped).sort();
   
   groupKeys.forEach((group, index) => {
-    if (index > 0 || ungrouped.length > 0) {
+    if (index > 0) {
       css += '\n';
     }
     css += `  /* ${group} */\n`;
