@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Tokens Example</title>
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    body {
+      font-family: var(--Font-Family: Mode 1--Body, Inter, sans-serif);
+      background-color: var(--Color: Mode 1--Background--White);
+      color: var(--Color: Mode 1--Typography_on_Light--Header);
+      padding: var(--Revive: Web--LayoutSetting--Gap--Padding_L);
+      margin: 0;
+    }
+
+    h1 {
+      font-family: var(--Font-Family: Mode 1--Header, Montserrat, sans-serif);
+      font-size: var(--Revive: Web--Typography--Header--Font-Size--H1);
+      line-height: var(--Revive: Web--Typography--Header--Line-Height--H1);
+      letter-spacing: var(--Revive: Web--Typography--Header--Letter_Spacing--H1);
+      margin-bottom: var(--Revive: Web--LayoutSetting--Gap--Title_Gap);
+    }
+
+    h2 {
+      font-family: var(--Font-Family: Mode 1--Header, Montserrat, sans-serif);
+      font-size: var(--Revive: Web--Typography--Header--Font-Size--H2);
+      line-height: var(--Revive: Web--Typography--Header--Line-Height--H2);
+      letter-spacing: var(--Revive: Web--Typography--Header--Letter_Spacing--H2);
+      margin-top: var(--Revive: Web--LayoutSetting--Gap--Content_Gap);
+      margin-bottom: var(--Revive: Web--LayoutSetting--Gap--Card_Gap);
+    }
+
+    p {
+      font-size: var(--Revive: Web--Typography--Paragraph--Font-Size--P2);
+      line-height: var(--Revive: Web--Typography--Paragraph--Line-Height--P2);
+      color: var(--Color: Mode 1--Typography_on_Light--Paragraph);
+      margin-bottom: var(--Revive: Web--LayoutSetting--Gap--Card_Gap);
+    }
+
+    .button {
+      background-color: var(--Color: Mode 1--Button--Primary--Normal);
+      color: white;
+      padding: var(--Revive: Web--LayoutSetting--Gap--Padding_S) var(--Revive: Web--LayoutSetting--Gap--Padding_M);
+      border: none;
+      border-radius: var(--Revive: Web--LayoutSetting--Radius--S);
+      font-size: var(--Revive: Web--Typography--Label--Font-Size--L2);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: var(--Color: Mode 1--Button--Primary--Hover);
+    }
+
+    .button:active {
+      background-color: var(--Color: Mode 1--Button--Primary--Pressed);
+    }
+
+    .card {
+      background-color: var(--Color: Mode 1--Background--Surface_Light);
+      padding: var(--Revive: Web--LayoutSetting--Gap--Padding_L);
+      border-radius: var(--Revive: Web--LayoutSetting--Radius--M);
+      margin-top: var(--Revive: Web--LayoutSetting--Gap--Content_Gap);
+    }
+
+    .accent {
+      color: var(--Color: Mode 1--Typography_on_Light--Accent);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Design Tokens Example</h1>
+  
+  <p>
+    This page demonstrates the use of <span class="accent">CSS custom properties</span> 
+    generated from JSON design tokens. All the typography, colors, spacing, and other 
+    design values are defined in the <code>tokens.json</code> file and automatically 
+    converted to CSS.
+  </p>
+
+  <div class="card">
+    <h2>Features</h2>
+    <p>
+      The system automatically converts nested JSON structures into CSS custom properties.
+      This allows designers to maintain a single source of truth for design tokens in JSON
+      format, while developers can use the generated CSS in their applications.
+    </p>
+    <button class="button">Primary Button</button>
+  </div>
+
+  <div class="card">
+    <h2>Typography System</h2>
+    <p>
+      All typography values including font sizes, line heights, and letter spacing are
+      defined as design tokens. This ensures consistency across the entire application.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Color Palette</h2>
+    <p>
+      Colors are organized by context (backgrounds, buttons, typography) and mode
+      (light/dark), making it easy to maintain a consistent color system.
+    </p>
+  </div>
+</body>
+</html>
